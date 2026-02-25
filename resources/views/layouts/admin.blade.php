@@ -13,6 +13,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://kit.fontawesome.com/2cf911a520.js" crossorigin="anonymous"></script>
 
         <!-- Styles -->
         @livewireStyles
@@ -35,6 +36,7 @@
         <body>
     @yield('content')
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    
 </body>
 
     </body>
