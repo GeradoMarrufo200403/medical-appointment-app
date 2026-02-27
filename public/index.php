@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\RoleController;
 
 define('LARAVEL_START', microtime(true));
 
