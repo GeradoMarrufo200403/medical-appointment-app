@@ -77,8 +77,31 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Role $role)
     {
-        //
+        //1.Definir roles
+        $protectedRoles = ['Admin', 'Doctor',
+         'Paciente', 'Recepcionista', 'Super admin'];
+
+        //2.Revisar si el rol actual esta en los roles protegidos
+        if(in_array($role->name, $protectedRoles)){
+            session()->flash('swal',[
+                'icon' => 'error',
+                'title' => 'Error',
+                'text' => 'No puedes eliminar un rol'
+            ]);
+            return redirect(route('admin.roles.index'));
+        }
+        
+
+        //Borrar el elemento
+        $role->delete();
+
+        //Confirmacion de operacion exitosa
+        session()->flash('swal,success',[
+            'icon' => 'success',
+            'title' => 'Rol eliminado',
+            'text' => 'El rol se ha eliminado correctamente'
+        ]);
     }
 }
