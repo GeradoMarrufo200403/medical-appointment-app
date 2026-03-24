@@ -63,15 +63,30 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return view('admin.roles.edit', compact($role));
+        return view('admin.roles.edit', compact('role'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        //Validar que se actualice bien y que excluya la fila que se edita
+        $request->validate([
+            'name' => 'required|unique:roles,name,',
+        ]);
+        //Si pasa la validacion, actualizar el rol
+        $role->update([
+            'name' => $request->name
+        ]);
+        //Confirmacion de operacion exitosa
+        session()->flash('swal',[   
+            'icon' => 'success',
+            'title' => 'Rol actualizado correctamente',
+            'text' => 'El rol se ha modificado correctamente'
+        ]);
+        //Redireccionar a la misma vista de editar
+        return redirect(route('admin.roles.edit', $role));
     }
 
     /**
@@ -103,5 +118,8 @@ class RoleController extends Controller
             'title' => 'Rol eliminado',
             'text' => 'El rol se ha eliminado correctamente'
         ]);
+
+        //Redireccion
+        return redirect(route('admin.roles.index'));
     }
 }
