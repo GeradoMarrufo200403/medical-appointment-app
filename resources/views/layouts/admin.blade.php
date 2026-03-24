@@ -11,14 +11,21 @@
 
         <title>{{ $title }}</title>
 
+        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <wireui:scripts />
-
+        {{--Font Awesome CSS--}}
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="https://kit.fontawesome.com/2cf911a520.js" crossorigin="anonymous"></script>
 
+        <!--SweetAlert-->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        {{--WireUI--}}
+        <wireui:scripts />
+
+        <!-- Styles -->
         @livewireStyles
     </head>
     <body class="font-sans antialiased bg-gray-50">
@@ -29,13 +36,25 @@
         @include('layouts.includes.admin.sidebar')
 
         <div class="p-4 sm:ml-64 mt-14">
-            <div class="mt-14">
+            <div class="mt-14 flex justify-between items-center w-full">
                 @include('layouts.includes.admin.breadcrumb')
+                @isset($action)
+                <div>
+                    {{ $action }}
+                </div>
+                @endisset
             </div>
               {{ $slot }}   
         </div>
 
         @stack('modals')
+
+        {{--mostar sweetalert--}}
+        @if (session('swal'))
+            <script>
+                Swal.fire(@json(session('swal')));
+            </script>
+        @endif
 
         @livewireScripts
         <body>

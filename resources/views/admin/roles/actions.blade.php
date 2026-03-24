@@ -1,7 +1,7 @@
 <div class="flex items-center gap-2">
-    <x-wireui::button href="{{ route('admin.roles.edit', $role) }}" blue xs>
+    <x-wire-button href="{{ route('admin.roles.edit', $role) }}" blue xs>
         <i class="fa-solid fa-pen-to-square"></i>
-    </x-wireui::button>
+    </x-wire-button>
 
     <form action="{{ route('admin.roles.destroy', $role) }}" method="POST" class="inline">
         @csrf

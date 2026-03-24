@@ -34,12 +34,11 @@
                             {{ $link['header'] }}
                         </div>
                         {{--Si no existe, usa la etiqueta como estaba definida--}}
-                    @else
-                        <a href="{{ $link['href'] }}" 
-                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-neutral-800 group {{ $link['active'] ? 'bg-gray-100' : '' }}">
-                            <span class="w-6 h-6 inline-flex justify-center items-center text-gray-500">
-                                <i class="{{ $link['icon'] }}"></i>
-                            </span>                              
+                    @else                   
+                        <a href="{{ $link['href'] }}" class="flex items-center w-full p-2 text-base text-gray-900"
+                            class="flex items-center p-2  py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group {{ $link['active'] ? 'bg-neutral-secondary text-fg-brand' : 'text-gray-500' }}">
+                            <span class="w-6 h-6 inline-flex items-center justify-center  text-gray-500">
+                                <i class="{{ $link['icon'] }}"></i> </span>                              
                             <span class="ms-3">{{ $link['name'] }}</span>
                         </a>
                     @endisset

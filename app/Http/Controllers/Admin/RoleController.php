@@ -40,7 +40,7 @@ class RoleController extends Controller
         ]);
 
         //Confirmacion de operacion exitosa
-        session()->flash('success',[
+        session()->flash('swal',[
             'icon' => 'success',
             'title' => 'Rol creado',
             'text' => 'El rol se ha creado correctamente'
