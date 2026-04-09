@@ -17,6 +17,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::prefix('admin')
+    ->name('admin.')
+    ->group(base_path('routes/admin.php')); 
 });
 
-Route::resource('/admin/roles', RoleController::class)->names('admin.roles');

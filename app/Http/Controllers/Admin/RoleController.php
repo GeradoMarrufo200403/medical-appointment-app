@@ -36,7 +36,9 @@ class RoleController extends Controller
 
         //Si pasa la validacion, crear el rol
         Role::create([
-            'name' => $request->name
+            'name' => $request->name,
+            'guard_name' => 'web',
+            'is_system' => false,
         ]);
 
         //Confirmacion de operacion exitosa
@@ -63,6 +65,16 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+
+        //Validacion a nivel BD
+        if($role->is_system){
+            session()->flash('swal',[
+                'icon' => 'error',
+                'title' => 'Accion denegada',
+                'text' => 'No puedes editar un rol reservado del sistema.'
+            ]);
+            return redirect(route('admin.roles.index'));
+        }
         return view('admin.roles.edit', compact('role'));
     }
 
@@ -71,9 +83,13 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+        //Validacion a nivel BD
+        if($role->is_system){
+            return redirect(route('admin.roles.index'));
+        }
         //Validar que se actualice bien y que excluya la fila que se edita
-        $request->validate([
-            'name' => 'required|unique:roles,name,',
+        $request->validate([ 
+            'name' => 'required|unique:roles,name,'. $role->id,
         ]);
         //Si pasa la validacion, actualizar el rol
         $role->update([
@@ -94,20 +110,15 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //1.Definir roles
-        $protectedRoles = ['Admin', 'Doctor',
-         'Paciente', 'Recepcionista', 'Super admin'];
-
-        //2.Revisar si el rol actual esta en los roles protegidos
-        if(in_array($role->name, $protectedRoles)){
+        //Validacion a nivel BD
+        if($role->is_system){
             session()->flash('swal',[
                 'icon' => 'error',
-                'title' => 'Error',
-                'text' => 'No puedes eliminar un rol'
+                'title' => 'Accion denegada',
+                'text' => 'No puedes eliminar un rol reservado del sistema.'
             ]);
             return redirect(route('admin.roles.index'));
         }
-        
 
         //Borrar el elemento
         $role->delete();

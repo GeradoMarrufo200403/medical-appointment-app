@@ -27,7 +27,9 @@ class RoleTable extends DataTableComponent
                 ->format(function($value){
                     return $value->format('d/m/Y');
                 }),
-            column::make("Acciones", "id")
+            Column::make("Sistema", "is_system")
+                ->hideIf(true),    
+            column::make("Acciones")
                 ->label(function($row){
                     return view('admin.roles.actions', 
                     ['role' => $row]);

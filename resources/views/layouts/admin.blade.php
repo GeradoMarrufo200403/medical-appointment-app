@@ -61,11 +61,12 @@
     @yield('content')
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
     <script>
-        //Busca todos los elementos para borrar
+        //Busca todos los elementos de una clase en especifico
         forms = document.querySelectorAll('.delete-form');
         forms.forEach(form => {
+            //Revisa cualquier accion de envio
             form.addEventListener('submit', function(e) {
-                //No borrar
+                //Preeviene el envio del formulario
                 e.preventDefault();
                 Swal.fire({
                     title: '¿Estás seguro?',

