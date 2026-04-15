@@ -31,7 +31,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data  = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'id_number' => 'required|string|min:5|max:20|regex:/^[A-Za-z0-9]+$/|unique:users',
+            'phone' => 'required|digits_between:7,15',
+            'address' => 'required|string|max:255',
+            'role_id' => 'required|exists:roles,id',
+        ]);
+
+        $user = User::create($data);
+        $user->roles()->attach($data['role_id']);
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Usuario creado exitosamente',
+            'text' => 'El usuario ha sido creado exitosamente',
+        ]);
+
+        return redirect(route('admin.users.index'))->with('success', 'User created succesfully.');
     }
 
     /**
@@ -47,7 +66,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit', compact('user'));
+        $roles = Role::all();
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -55,7 +75,35 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $data  = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8|confirmed',
+            'id_number' => 'required|string|min:5|max:20|regex:/^[A-Za-z0-9]+$/|unique:users,id_number,' . $user->id,
+            'phone' => 'required|digits_between:7,15',
+            'address' => 'required|string|max:255',
+            'role_id' => 'required|exists:roles,id',
+        ]);
+
+        // Si la contraseña viene vacía en el formulario, es porque no la quieren cambiar, la quitamos del array $data
+        if (empty($data['password'])) {
+            unset($data['password']);
+        } else {
+            // Si viene con datos, la encriptamos antes de actualizar
+            $data['password'] = bcrypt($data['password']);
+        }
+
+        $user->update($data);
+
+        $user->roles()->sync($data['role_id']);
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Usuario actualizado',
+            'text' => 'El usuario ha sido actualizado exitosamente',
+        ]);
+
+        return redirect()->route('admin.users.edit', $user->id);
     }
 
     /**
@@ -63,6 +111,17 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        //Eliminar roles asociados  a un usuario
+        $user->roles()->detach();
+        //Eliminar el usuario
+        $user->delete();
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Usuario eliminado',
+            'text' => 'El usuario ha sido eliminado exitosamente',
+        ]);
+
+        return redirect(route('admin.users.index'));
     }
 }

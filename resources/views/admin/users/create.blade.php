@@ -14,12 +14,16 @@
 
 ]">
     <x-wire-card>
+        <x-validation-errors class="mb-4" />
         <form action="{{ route('admin.users.store') }}" method="POST">
             @csrf
             <div class="space-y-4">
                 <div class="grid lg:grid-cols-2 gap-4">
                     <x-wire-input label="Nombre" name="name" placeholder="Nombre completo"
                         :value="old('name')"></x-wire-input>
+
+                    <x-wire-input label="correo electronico" name="email" type="email" placeholder="ejemplo@dominio.com"
+                        autocomplete="email" :value="old('email')"></x-wire-input>
 
                     <x-wire-input label="Contraseña" name="password" type="password" placeholder="Minimo 8 caracteres" required
                         autocomplete="new-password"></x-wire-input>

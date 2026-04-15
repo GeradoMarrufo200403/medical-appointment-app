@@ -39,9 +39,9 @@
     <div class="p-4 sm:ml-64 mt-14">
         <div class="mt-14 flex justify-between items-center w-full">
             @include('layouts.includes.admin.breadcrumb')
-            @isset($action)
+            @isset($actions)
             <div>
-                {{ $action }}
+                {{ $actions }}
             </div>
             @endisset
         </div>
