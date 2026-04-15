@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 
 //candado directo y explicito en este archivo
 Route::middleware([
@@ -17,5 +18,8 @@ Route::middleware([
 
     //Gestion de roles
     Route::resource('roles', RoleController::class);
+
+    //Gestion de usuarios
+    Route::resource('users', UserController::class);
 
 });  
