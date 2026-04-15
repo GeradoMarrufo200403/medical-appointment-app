@@ -8,8 +8,8 @@
         <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h10"/>
         </svg>
                 </button>
-                <a href="/" class="flex ms-2 md:me-24">
-                <img src="images/LogoMed.png" class="h-9 me-3" alt="Medical Logo" />
+                <a href="{{ route('admin.dashboard') }}" class="flex ms-2 md:me-24">
+                <img src="{{ asset('images/LogoMed.png') }}" class="h-9 me-3" alt="Medical Logo" />
                 <span 
                     class="self-center text-lg font-semibold whitespace-nowrap dark:text-white">Medical</span>
                 </a>
