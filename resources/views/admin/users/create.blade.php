@@ -34,24 +34,25 @@
                         inputmode="tel" :value="old('phone')"></x-wire-input>
 
                 </div>
-                <x-wire-imput name="address" label="Direccion" required :value="old('address')"placeholder="Ej. Calle 123, Col. Centro" 
-                    autocomplete="street-address"></x-wire-imput>
+                <x-wire-input name="address" label="Direccion" required :value="old('address')" placeholder="Ej. Calle 123, Col. Centro"
+                    autocomplete="street-address"></x-wire-input>
 
-                    <div class="space-y-1">
-                        <x-wire-native-select name="role_id" label="Rol" required>
-                            <option value="">
-                                Seleccione un rol
-                            </option>
+                <div class="space-y-1">
+                    <x-wire-native-select name="role_id" label="Rol" required>
+                        <option value="">
+                            Seleccione un rol
+                        </option>
 
                         @foreach ($roles as $role)
-                            <option value="{{ $role->id }}" @selected(old ('role_id') == $role->id)>
-                                {{ $role->name }}</option>
+                        <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}>
+                            {{ $role->name }}
+                        </option>
                         @endforeach
-                        </x-wire-native-select>
-                        <p class="text-sm text-gray-500">
-                            Define lo permisos y accesos del Usuarios.
-                        </p>
-                    </div>
+                    </x-wire-native-select>
+                    <p class="text-sm text-gray-500">
+                        Define lo permisos y accesos del Usuarios.
+                    </p>
+                </div>
 
                 <div class="flex justify-end">
                     <x-wire-button type="submit" blue>Guardar</x-wire-button>

@@ -27,7 +27,6 @@
     <wireui:scripts />
 
     <!-- Styles -->
-    @livewireStyles
 </head>
 
 <body class="font-sans antialiased bg-gray-50">
@@ -53,16 +52,15 @@
 
     {{--mostar sweetalert--}}
     @if (session('swal'))
+    <script id="swal-data" type="application/json">
+        {!! json_encode(session('swal')) !!}
+    </script>
     <script>
-        Swal.fire({
-            !!json_encode(session('swal')) !!
-        });
+        const swalData = document.getElementById('swal-data').textContent;
+        Swal.fire(JSON.parse(swalData));
     </script>
     @endif
 
-    @livewireScripts
-
-    <body>
         @yield('content')
         <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
         <script>
@@ -90,8 +88,6 @@
                 });
             });
         </script>
-    </body>
-
 </body>
 
 </html>
