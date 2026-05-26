@@ -27,6 +27,7 @@
     <wireui:scripts />
 
     <!-- Styles -->
+    @livewireStyles
 </head>
 
 <body class="font-sans antialiased bg-gray-50">
@@ -88,6 +89,7 @@
                 });
             });
         </script>
+        @livewireScripts
 </body>
 
 </html>
