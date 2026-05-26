@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\DoctorController;
 use Illuminate\Support\Facades\Route;
 
 //candado directo y explicito en este archivo
@@ -27,6 +28,6 @@ Route::middleware([
     Route::resource('patients', PatientController::class);
 
     //Gestion de doctores
-    Route::resource('doctors', App\Http\Controllers\Admin\DoctorController::class);
+    Route::resource('doctors', DoctorController::class);
 
 });  

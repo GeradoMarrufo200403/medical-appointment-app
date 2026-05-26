@@ -42,5 +42,17 @@ class UserSeeder extends Seeder
             'medical_license_number' => '6549876341654654',
             'biography' => 'Hola soy un doctor',
         ]);
+
+        // Restaurar a la paciente 'Yuri' que tenías creada manualmente
+        $yuriUser = User::factory()->create([
+            'name' => 'Yuri',
+            'email' => 'sisco@gmail.com',
+            'password' => bcrypt('12345678'),
+            'id_number' => '987654321', // ID ficticio para Yuri
+            'phone' => '999999999',
+            'address' => 'Calle Ficticia 456',
+        ]);
+        $yuriUser->assignRole('Paciente');
+        $yuriUser->patient()->create([]);
     }
 }
