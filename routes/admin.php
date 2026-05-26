@@ -26,4 +26,7 @@ Route::middleware([
     //Gestion de pacientes
     Route::resource('patients', PatientController::class);
 
+    //Gestion de doctores
+    Route::resource('doctors', App\Http\Controllers\Admin\DoctorController::class);
+
 });  

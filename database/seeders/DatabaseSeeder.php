@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         // Llamar a los seeders creados
         $this->call(RoleSeeder::class);
+        $this->call(SpecialitySeeder::class);
         $this->call(UserSeeder::class);
         $this->call(BloodTypeSeeder::class);
     }

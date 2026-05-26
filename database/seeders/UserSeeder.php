@@ -23,5 +23,24 @@ class UserSeeder extends Seeder
             'phone' => '999999999',
             'address' => 'Test Address',     
         ])->assignRole('Administrador');
+
+        // Crear doctor de prueba para demostración y evaluación visual
+        $speciality = \App\Models\Speciality::where('name', 'Cardiología')->first();
+
+        $doctorUser = User::factory()->create([
+            'name' => 'Iris Godoy',
+            'email' => 'iris.godoy@gmail.com',
+            'password' => bcrypt('12345678'),
+            'id_number' => '6549876341654654',
+            'phone' => '999999999',
+            'address' => 'Av. de los Doctores 123',
+        ]);
+        $doctorUser->assignRole('Doctor');
+        
+        $doctorUser->doctor()->create([
+            'speciality_id' => $speciality?->id ?? 1,
+            'medical_license_number' => '6549876341654654',
+            'biography' => 'Hola soy un doctor',
+        ]);
     }
 }

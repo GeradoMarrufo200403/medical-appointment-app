@@ -56,7 +56,13 @@ class UserController extends Controller
             //Creamos el registro del paciente
            $patient = $user->patient()->create([]);
            return redirect()->route('admin.patients.edit', $patient);
-          
+        }
+
+        //si el usuario creado es un doctor, envia el modulo doctores
+        if($user->hasRole('Doctor')){
+            //Creamos el registro del doctor
+            $doctor = $user->doctor()->create([]);
+            return redirect()->route('admin.doctors.edit', $doctor);
         }
 
         return redirect(route('admin.users.index'))->with('success', 'User created succesfully.');
