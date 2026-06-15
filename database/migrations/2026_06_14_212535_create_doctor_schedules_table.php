@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('doctor_schedules', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('doctor_id')->constrained()->onDelete('cascade');
+            $table->string('day_of_week'); // Lunes, Martes, Miércoles, Jueves, Viernes, etc.
+            $table->string('hour'); // ej: '08:00:00', '09:00:00'
+            $table->json('slots'); // Array: ["08:00 - 08:15", "08:15 - 08:30", ...]
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('doctor_schedules');
+    }
+};

@@ -17,13 +17,13 @@
         @csrf
         @method('PUT')
         {{--Encabezado con foto y acciones--}}
-        <x-wire-card class="mb-4">
+        <x-wire-card class="mb-8">
             <div class="lg:flex lg:justify-between lg:items-center">
                 <div class="flex items-center">
                     <img src="{{ $patient->user->profile_photo_url }}" alt="{{ $patient->user->name }}"
                         class="h-20 w-20 rounded-full object-cover object-center">
                     <div>
-                        <p class="text-2xl font-bold text-gray-900">{{ $patient->user->name }}</p>
+                        <p class="text-2xl font-bold text-gray-900 ml-4">{{ $patient->user->name }}</p>
 
                     </div>
                 </div>
@@ -192,11 +192,13 @@
                      {{--Contenido de  Tab4 :Contacto de emergencia--}}
                     <div x-show="tab === 'contactos de emergencia'" style="display: none;">
                         <div class="space-y-4">
-                            <x-wire-input label="Nombre de contacto de emergencia" name="emergency_contact_name" 
+                            <x-wire-input label="Nombre de contacto" name="emergency_contact_name" 
                                 :value="old('emergency_contact_name', $patient->emergency_contact_name)"/>
-                            <x-wire-input label="Telefono de contacto de emergencia" name="emergency_contact_phone" 
+                            <x-wire-phone label="Telefono de contacto" name="emergency_contact_phone" 
+                                mask="(####) ####-####" placeholder="(999) 999-9999" 
                                 :value="old('emergency_contact_phone', $patient->emergency_contact_phone)"/>
                             <x-wire-input label="Relacion con el paciente" name="emergency_contact_relationship" 
+                                placeholder="Familiar, Amigo, etc"
                                 :value="old('emergency_contact_relationship', $patient->emergency_contact_relationship)"/>
                         </div>
                     </div>
