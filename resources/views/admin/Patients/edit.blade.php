@@ -110,18 +110,18 @@
                                 <div class="flex items-start">
                                     <div class="flex-shrink-0">
                                         <i class="fa-solid fa-user-gear text-blue-500 text-xl mt-1"></i>
-                                     
-                                    </div>
-                                     <div class="ml-3">
-                                            <h3 class="text-sm font bold text-blue-800">
-                                                Edicion de cuenta de usuario</h3>
-                                            <div class="mt-1 text-sm text blue-600">
-                                                <p>La <strong>informacion de acceso</strong>(nombre, email y
-                                                    contraseña)
-                                                    debe gestionarse desde la cuenta de usuario asociada.</p>
 
-                                            </div>
+                                    </div>
+                                    <div class="ml-3">
+                                        <h3 class="text-sm font bold text-blue-800">
+                                            Edicion de cuenta de usuario</h3>
+                                        <div class="mt-1 text-sm text blue-600">
+                                            <p>La <strong>informacion de acceso</strong>(nombre, email y
+                                                contraseña)
+                                                debe gestionarse desde la cuenta de usuario asociada.</p>
+
                                         </div>
+                                    </div>
                                 </div>
                                 {{--Lado derecho: Boton de accion--}}
                                 <div class="flex-shrink-0">
@@ -137,15 +137,15 @@
                         <div class="grid lg:grid-cols-2 gap-4">
                             <div>
                                 <span class="text-gray-500 font-semibold">Telefono</span>
-                                <span class="text-gray-500 text-sm ml-1">{{  $patient->user->phone}}</span>
+                                <span class="text-gray-500 text-sm ml-1">{{ $patient->user->phone}}</span>
                             </div>
                             <div>
                                 <span class="text-gray-500 font-semibold">Email</span>
-                                <span class="text-gray-500 text-sm ml-1">{{  $patient->user->email}}</span>
+                                <span class="text-gray-500 text-sm ml-1">{{ $patient->user->email}}</span>
                             </div>
                             <div>
                                 <span class="text-gray-500 font-semibold">Direccion</span>
-                                <span class="text-gray-500 text-sm ml-1">{{  $patient->user->address}}</span>
+                                <span class="text-gray-500 text-sm ml-1">{{ $patient->user->address}}</span>
                             </div>
 
                         </div>
@@ -180,26 +180,26 @@
                     <div x-show="tab === 'informacion general'" style="display: none;">
                         <x-wire-native-select label="Tipo de sangre" class="mb-4" name="blood_type_id">
                             @foreach ($bloodTypes as $bloodType)
-                                <option value="{{ $bloodType->id }}" {{ old('blood_type_id', $patient->blood_type_id) == $bloodType->id ? 'selected' : '' }}>
-                                    {{ $bloodType->name }}
-                                </option>
+                            <option value="{{ $bloodType->id }}" {{ old('blood_type_id', $patient->blood_type_id) == $bloodType->id ? 'selected' : '' }}>
+                                {{ $bloodType->name }}
+                            </option>
                             @endforeach
                         </x-wire-native-select>
                         <x-wire-textarea label="Observaciones" name="observations"
                             :value="old('observations', $patient->observations)">
                         </x-wire-textarea>
                     </div>
-                     {{--Contenido de  Tab4 :Contacto de emergencia--}}
+                    {{--Contenido de  Tab4 :Contacto de emergencia--}}
                     <div x-show="tab === 'contactos de emergencia'" style="display: none;">
                         <div class="space-y-4">
-                            <x-wire-input label="Nombre de contacto" name="emergency_contact_name" 
-                                :value="old('emergency_contact_name', $patient->emergency_contact_name)"/>
-                            <x-wire-phone label="Telefono de contacto" name="emergency_contact_phone" 
-                                mask="(####) ####-####" placeholder="(999) 999-9999" 
-                                :value="old('emergency_contact_phone', $patient->emergency_contact_phone)"/>
-                            <x-wire-input label="Relacion con el paciente" name="emergency_contact_relationship" 
+                            <x-wire-input label="Nombre de contacto" name="emergency_contact_name"
+                                :value="old('emergency_contact_name', $patient->emergency_contact_name)" />
+                            <x-wire-phone label="Telefono de contacto" name="emergency_contact_phone"
+                                mask="(####) ####-####" placeholder="(999) 999-9999"
+                                :value="old('emergency_contact_phone', $patient->emergency_contact_phone)" />
+                            <x-wire-input label="Relacion con el paciente" name="emergency_contact_relationship"
                                 placeholder="Familiar, Amigo, etc"
-                                :value="old('emergency_contact_relationship', $patient->emergency_contact_relationship)"/>
+                                :value="old('emergency_contact_relationship', $patient->emergency_contact_relationship)" />
                         </div>
                     </div>
                 </div>

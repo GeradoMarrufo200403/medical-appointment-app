@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\AppointmentController;
+use App\Http\Controllers\Admin\InsuranceController;
 use Illuminate\Support\Facades\Route;
 
 //candado directo y explicito en este archivo
@@ -35,5 +36,8 @@ Route::middleware([
     //Gestion de citas
     Route::resource('appointments', AppointmentController::class);
     Route::get('appointments/{appointment}/consultation', [AppointmentController::class, 'consultation'])->name('appointments.consultation');
+
+    //Gestion de seguros (convenios)
+    Route::resource('insurances', InsuranceController::class);
 
 });  

@@ -40,6 +40,12 @@ $links = [
 'href' => route('admin.appointments.index'),
 'active' => request()->routeIs('admin.appointments.*') || request()->routeIs('admin.appointments'),
 ],
+[
+'name' => 'Seguros',
+'icon' => 'fa-solid fa-file-contract',
+'href' => route('admin.insurances.index'),
+'active' => request()->routeIs('admin.insurances.*'),
+],
 ];
 @endphp
 
