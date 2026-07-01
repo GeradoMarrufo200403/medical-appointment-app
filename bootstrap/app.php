@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         // CORRECCIÓN: 'then' debe ser todo en minúsculas
         then: function(){
-            Route::middleware('web', 'auth') // Sugerencia: 'middleware' también se suele escribir en minúscula
+            Route::middleware(['web', 'auth']) // CORREGIDO: Se agrupan los middleware en un array
                 ->prefix('admin')
                 ->name('admin.')
                 ->group(base_path('routes/admin.php'));
@@ -24,4 +24,8 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
-    })->create();
+    })
+    ->withSchedule(function (\Illuminate\Console\Scheduling\Schedule $schedule) {
+        $schedule->command('appointments:send-reminders')->dailyAt('09:00');
+    })
+    ->create();
